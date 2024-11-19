@@ -1,0 +1,43 @@
+import networkx as nx
+
+# Crear un grafo dirigido (asumimos que las conexiones son unidireccionales)
+G = nx.DiGraph()
+
+# Agregar nodos (librerías y casita)
+nodos = ["Casita", "LibreriaFibonacci", "LibreriaHilbert", "LibreriaFahrenheit", "LibreriaCelsius",
+         "LibreriaRichter", "LibreriaGauss", "LibreriaVoronoi", "LibreriaGardner", "LibreriaEuler", "LibreriaKonisberg"]
+G.add_nodes_from(nodos)
+
+# Agregar aristas con sus respectivos pesos (distancias)
+# (Nota: Ajusta estos valores según la imagen proporcionada)
+aristas = [
+    ("Casita", "LibreriaFibonacci", 310),
+    # ... agregar todas las aristas
+]
+G.add_weighted_edges_from(aristas)
+
+# Obtener la matriz de adyacencia
+matriz_adyacencia = nx.adjacency_matrix(G).todense()
+print("Matriz de Adyacencia:")
+print(matriz_adyacencia)
+
+# Obtener la matriz de incidencia
+matriz_incidencia = nx.incidence_matrix(G, oriented=True).todense()
+print("\nMatriz de Incidencia:")
+print(matriz_incidencia)
+
+# Encontrar el camino más corto desde "Casita" a "LibreriaCelsius"
+camino_mas_corto = nx.dijkstra_path(G, source="Casita", target="LibreriaCelsius")
+distancia_mas_corta = nx.dijkstra_path_length(G, source="Casita", target="LibreriaCelsius")
+
+print("\nCamino más corto:")
+print(camino_mas_corto)
+print("Distancia más corta:")
+print(distancia_mas_corta)
+
+
+aristas = [
+    ("Casita", "LibreriaFibonacci", 310),
+    ("LibreriaFibonacci", "LibreriaHilbert", 250),
+    # ... agregar todas las demás aristas aquí
+]
